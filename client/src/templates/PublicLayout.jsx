@@ -1,13 +1,15 @@
 import { Outlet } from "react-router";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 export function PublicLayout()
 
  { return(
 
 <>
-<header>Header content!!!!!</header>
+<Header />
 <Outlet />
-<footer>Footer content!!!!!</footer>
+<Footer />
 
 </>
  )

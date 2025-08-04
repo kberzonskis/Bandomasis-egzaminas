@@ -4,8 +4,8 @@ const app = exprees();
 app.get('/', (req,res) => { 
 return res.json ({ 
     status: 'succes',
-    message: 'server now running'
-
+    message: 'Laikinai veikia taip', 
+    
 })
 
 })
