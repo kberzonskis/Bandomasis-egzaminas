@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import heroImg from '../../assets/hero.png';
+
 import taxi from '../../assets/OIP.webp'
 
 export function HomePage() { 

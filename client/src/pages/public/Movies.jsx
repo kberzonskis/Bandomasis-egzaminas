@@ -1,5 +1,7 @@
 import { PublicPageTitle } from '../../components/PublicPageTitle';
 import { MovieCard } from '../../components/MovieCard';
+import { MoviesFilter } from '../../components/MoviesFilter';
+
 
 export function MoviesPage() {
     const moviesData = [{}, {}, {}, {}, {}, {}, {}];
@@ -8,7 +10,7 @@ export function MoviesPage() {
         <main className='min-page-height'>
             <PublicPageTitle title='Movies' />
 
-            <div>MOVIES FILTER</div>
+            <MoviesFilter />
 
             <div className="container">
                 <div className="row">
