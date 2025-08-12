@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 import { initialUserContext } from "./initialUserContext";
 
@@ -7,6 +7,11 @@ export function UserContextWrapper(props) {
     const [role, setRole] = useState(initialUserContext.role);
     const [email, setEmail] = useState(initialUserContext.email);
     const [userId, setUserId] = useState(initialUserContext.userId);
+
+    // useEffect(() => {
+    //     fetch()
+    //     login()
+    // }, []);
 
     function login(email, userId) {
         setIsLoggedIn(true);
