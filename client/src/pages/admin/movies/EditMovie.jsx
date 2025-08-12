@@ -20,7 +20,7 @@ export function AdminEditMoviePage() {
 
             <div className="container">
                 <div className="row">
-                    <div class="col-12 col-md-9 mt-5">
+                    <div className="col-12 col-md-9 mt-5">
                         <Alert text='Norimas filmas nerasta, todel redagavimas yra neimanomas.' />
                     </div>
                     <AdminMovieForm movie={movie} />

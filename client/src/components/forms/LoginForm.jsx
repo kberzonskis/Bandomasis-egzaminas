@@ -1,14 +1,17 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router";
 import { UserContext } from "../../context/user/UserContext";
 
 export function LoginForm() {
+    const navigate = useNavigate();
     const { login } = useContext(UserContext);
 
     function handleFormSubmit(e) {
         e.preventDefault();
-        login();
+        // fetch
+        login('tiesa@tiesa.lt', 1);
+        navigate('/admin');
     }
-
 
     return (
         <form onSubmit={handleFormSubmit} className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
