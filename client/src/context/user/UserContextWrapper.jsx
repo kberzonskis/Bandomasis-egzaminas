@@ -8,10 +8,7 @@ export function UserContextWrapper(props) {
     const [email, setEmail] = useState(initialUserContext.email);
     const [userId, setUserId] = useState(initialUserContext.userId);
 
-    // useEffect(() => {
-    //     fetch()
-    //     login()
-    // }, []);
+    
 
     function login(email, userId) {
         setIsLoggedIn(true);

@@ -1,9 +1,18 @@
 import express from 'express';
 import cors from 'cors';
-import helmet from 'helmet'
+import helmet from 'helmet';
 
-import { postRegister } from './src/api/public/postRegister.js';
-import { postLogin } from './src/api/public/postLogin.js';
+import { postPublicRegister } from './src/api/public/postRegister.js';
+import { postPublicLogin } from './src/api/public/postLogin.js';
+import { getLogin } from './src/api/public/getLogin.js';
+import { cookieParser } from './src/middleware/cookieParser.js';
+import { userData } from './src/middleware/userData.js';
+import { postAdminCategories } from './src/api/admin/categories/postCategories.js';
+import { isAdmin } from './src/middleware/isAdmin.js';
+import { getPublicCategories } from './src/api/public/getCategories.js';
+import { getAdminCategories } from './src/api/admin/categories/getCategories.js';
+import { isPublic } from './src/middleware/isPublic.js';
+import { putAdminCategories } from './src/api/admin/categories/putCategories.js';
 
 const app = express();
 
@@ -11,9 +20,10 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors({
     credentials: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    origin: 'http://localhost:5200',
+    origin: 'http://localhost:5520',
 }));
+app.use(cookieParser);
+app.use(userData);
 
 app.get('/', (req, res) => {
     return res.json({
@@ -22,8 +32,15 @@ app.get('/', (req, res) => {
     });
 });
 
-app.post('/api/register', postRegister);
-app.post('/api/login', postLogin);
+app.post('/api/register', isPublic, postPublicRegister);
+app.post('/api/login', isPublic, postPublicLogin);
+
+app.get('/api/categories', getPublicCategories);
+
+app.get('/api/login', isAdmin, getLogin);
+app.get('/api/admin/categories', isAdmin, getAdminCategories);
+app.post('/api/admin/categories', isAdmin, postAdminCategories);
+app.put('/api/admin/categories/:original_url', isAdmin, putAdminCategories);
 
 app.use((err, req, res, next) => {
     console.log(err);

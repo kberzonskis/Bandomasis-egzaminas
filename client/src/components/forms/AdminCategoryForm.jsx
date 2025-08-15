@@ -1,19 +1,20 @@
 import { useState } from "react";
 
-export function AdminCategoryForm({ category }) {
+export function AdminCategoryForm({ api, method, category }) {
     const [title, setTitle] = useState(category?.title ?? '');
-    const [url, setUrl] = useState(category?.url ?? '');
+    const [url, setUrl] = useState(category?.url_slug ?? '');
     const [description, setDescription] = useState(category?.description ?? '');
-    const [status, setStatus] = useState(category?.status ?? 'draft');
+    const [status, setStatus] = useState(category?.status_name ?? 'draft');
 
     function handleFormSubmit(e) {
         e.preventDefault();
 
-        fetch('http://localhost:5519/api/admin/categories', {
-            method: 'POST',
+        fetch(api, {
+            method: method,
             headers: {
                 'Content-Type': 'application/json',
             },
+            credentials: 'include',
             body: JSON.stringify({
                 title,
                 url,
