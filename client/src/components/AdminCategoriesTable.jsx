@@ -27,7 +27,7 @@ export function AdminCategoriesTable() {
                                     <td>0</td>
                                     <td><span className="badge text-bg-success">Published</span></td>
                                     <td className="d-flex gap-3">
-                                        <Link className="btn btn-primary btn-sm" to="/admin/categories/action/edit">Edit</Link>
+                                        <Link className="btn btn-dark btn-sm" to="/admin/categories/action/edit">Edit</Link>
                                         <button data-url="action" className="btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>

@@ -6,7 +6,6 @@ import { UserContext } from "../user/UserContext";
 export function MoviesContextWrapper(props) {
     const [publicMovies, setPublicMovies] = useState(initialMoviesContext.publicMovies);
     const [adminMovies, setAdminMovies] = useState(initialMoviesContext.adminMovies);
-
     const { isLoggedIn } = useContext(UserContext);
 
     function updatePublicMovies() {
