@@ -1,7 +1,7 @@
 import { connection } from "../../../db.js";
 import { IsValid } from "../../../lib/IsValid.js";
 
-export async function deleteAdminCategories(req, res) {
+export async function deleteAdminMovies(req, res) {
     const [err, msg] = IsValid.fields(req.params, {
         url: 'nonEmptyString',
     });
@@ -16,13 +16,13 @@ export async function deleteAdminCategories(req, res) {
     const { url } = req.params;
 
     try {
-        const sql = `DELETE FROM categories WHERE url_slug = ?;`;
+        const sql = `DELETE FROM movies WHERE url_slug = ?;`;
         const [response] = await connection.execute(sql, [url]);
 
         if (response.affectedRows === 0) {
             return res.status(400).json({
                 status: 'error',
-                msg: 'Tokia kategorija neegzistuoja',
+                msg: 'Toks filmas neegzistuoja',
             });
         }
     } catch (error) {
@@ -35,6 +35,6 @@ export async function deleteAdminCategories(req, res) {
 
     return res.status(200).json({
         status: 'success',
-        msg: 'Filmu kategorija istrinta sekmingai',
+        msg: 'Filmas istrintas sekmingai',
     });
 }
