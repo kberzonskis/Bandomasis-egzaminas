@@ -6,7 +6,8 @@ export class IsValid {
         for (const key in data) {
             if (!possibleKeys.includes(key)) {
                 return [true, '... Pateikei rakta kuris nera nei tarp privalomu, nei tarp papildomu galimu saraso... 👀👀👀'];
-            }
+            } ;
+            
         }
 
         for (const key in requiredSchema) {
@@ -176,6 +177,37 @@ export class IsValid {
 
         if (n < 0) {
             return [true, 'Turi buti teigiamas skaicius'];
+        }
+
+        return [false, ''];
+    }
+
+    static url(text) {
+        if (typeof text !== 'string') {
+            return [true, 'Turi buti tekstas'];
+        }
+
+        text = text.trim();
+
+        if (text.length === 0) {
+            return [true, 'Nuoroda turi buti ne tuscia'];
+        }
+
+        if (text.includes(' ')) {
+            return [true, 'Nuoroda negali tureti tarpo simbolio'];
+        }
+
+        const allowedSymbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_!';
+        const errors = [];
+
+        for (const s of text) {
+            if (!allowedSymbols.includes(s) && !errors.includes(s)) {
+                errors.push(s);
+            }
+        }
+
+        if (errors.length) {
+            return [true, `Nuoroda negali tureti siu simboliu: ${errors.join(', ')}`];
         }
 
         return [false, ''];
