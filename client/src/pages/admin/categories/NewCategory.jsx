@@ -1,5 +1,7 @@
 import { AdminPageTitle } from "../../../components/AdminPageTitle";
 import { AdminCategoryForm } from "../../../components/forms/AdminCategoryForm";
+import { SERVER_ADDRESS } from "../../../env";
+
 
 export function AdminNewCategoryPage() {
     return (
@@ -9,7 +11,7 @@ export function AdminNewCategoryPage() {
             <div className="container">
                 <div className="row">
                      <AdminCategoryForm
-                        api="http://localhost:5519/api/admin/categories"
+                        api={SERVER_ADDRESS + '/api/admin/categories'}
                         method="POST" />
                 </div>
             </div>

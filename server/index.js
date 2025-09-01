@@ -19,6 +19,12 @@ import { getAdminMovies } from './src/api/admin/movies/getMovies.js';
 import { postAdminMovies } from './src/api/admin/movies/postMovies.js';
 import { putAdminMovies } from './src/api/admin/movies/putMovies.js';
 import { deleteAdminMovies } from './src/api/admin/movies/deleteMovies.js';
+import { PORT } from './src/env.js';
+import { FILE_SIZE_LIMIT } from './src/env.js';
+import { uploadMovieThumbnailImage } from './src/middleware/uploadMovieThumbnail.js';
+import { postImageUpload } from './src/api/admin/movies/postImageUpload.js';
+import { formatFileSize } from './src/lib/formatFileSize.js';
+
 
 const app = express();
 
@@ -57,8 +63,17 @@ app.post('/api/admin/movies', isAdmin, postAdminMovies);
 app.put('/api/admin/movies/:original_url', isAdmin, putAdminMovies);
 app.delete('/api/admin/movies/:url', isAdmin, deleteAdminMovies);
 
+app.post('/api/admin/upload-image', isAdmin, uploadMovieThumbnailImage.single('img'), postImageUpload);
 app.use((err, req, res, next) => {
+    if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({
+            status: 'error',
+            msg: `Virsytas failo limitas (${formatFileSize(FILE_SIZE_LIMIT)})`,
+        });
+    }
+
     console.log(err);
+
     return res.status(500).send('Server error');
 });
 
@@ -69,6 +84,6 @@ app.get('*error', (req, res) => {
     });
 });
 
-app.listen(5519, () => {
-    console.log(`Server running: http://localhost:5519`);
+app.listen(PORT, () => {
+    console.log(`Server running: http://localhost:${PORT}`);
 });
